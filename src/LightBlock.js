@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import debounce from 'lodash/debounce';
 
-function Test({ color }) {
+function LightBlock({ color }) {
     const [colorMult, setColorMult] = useState(1);
     const testRef = useRef(null);
 
@@ -46,4 +46,4 @@ function Test({ color }) {
     );
 }
 
-export default Test;
+export default LightBlock;

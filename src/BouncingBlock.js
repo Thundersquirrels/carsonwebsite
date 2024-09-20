@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import debounce from 'lodash/debounce';
 
-const BouncingLogo = ({ parent }) => {
+const BouncingBlock = ({ parent }) => {
     const [position, setPosition] = useState({ x: 20, y: 20 });
     const logoRef = useRef(null);
 
@@ -84,4 +84,4 @@ const BouncingLogo = ({ parent }) => {
     );
 };
 
-export default BouncingLogo;
+export default BouncingBlock;
