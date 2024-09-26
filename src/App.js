@@ -1,16 +1,21 @@
 import React from 'react';
-import './App.css';
-import BlockScreen from './BlockScreen';
-import Chessboard from './Chess/Chessboard';
+import { Route, Routes } from 'react-router-dom';
+import HomePage from './Pages/HomePage';
+import AboutPage from './Pages/AboutPage';
+import GamesPage from './Pages/GamesPage';
+import ProjectsPage from './Pages/ProjectsPage';
+import MiscPage from './Pages/MiscPage';
 
 function App() {
-  return (
-    <div id="Home">
-      <h1>Carson Cox</h1>
-      <Chessboard />
-      <BlockScreen />
-    </div>
-  )
-};
+    return (
+        <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/games" element={<GamesPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/misc" element={<MiscPage />} />
+        </Routes>
+    );
+}
 
 export default App;

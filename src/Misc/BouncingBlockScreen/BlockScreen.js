@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import './App.css';
+import './BlockScreen.css';
 import LightBlock from './LightBlock.js';
 import BouncingBlock from './BouncingBlock.js';
 

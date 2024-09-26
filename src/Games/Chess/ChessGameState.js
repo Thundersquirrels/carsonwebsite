@@ -251,7 +251,6 @@ export const useChessGameState = () => {
      * @type {Object}
      */
     const playerGameState = makeMove(gameState, move);
-    console.log(timeLimit)
 
     /**
      * Check the game state after the player's move.

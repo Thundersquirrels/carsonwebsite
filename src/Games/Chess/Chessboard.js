@@ -55,19 +55,21 @@ const Chessboard = () => {
     // If a square is already selected
     if (selectedSquare) {
       // If the selected square is clicked again, deselect it and clear the valid moves
-      if (selectedSquare.row === row && selectedSquare.col === col) {
-        setValidMoves([]);
-        setSelectedSquare(null);
-        return;
-      }
+      // if (selectedSquare.row === row && selectedSquare.col === col) {
+      //   setValidMoves([]);
+      //   setSelectedSquare(null);
+      //   return;
+      // }
       /**
        * If a different square is clicked, find a valid move that starts at the selected square and ends at the clicked square.
        * @type {Object}
        */
       const move = validMoves.find(move => move.startRow === selectedSquare.row && move.startCol === selectedSquare.col && 
                                            move.endRow === row && move.endCol === col);
-      // If no such move is found, do nothing
+      // If no such move is found, deselect the selected square and clear the valid moves
       if (!move) {
+        setValidMoves([]);
+        setSelectedSquare(null);
         return;
       }
       // If such a move is found, update the game state with this move, clear the valid moves, and deselect the square
@@ -149,7 +151,7 @@ const Chessboard = () => {
       >
         {piece && (
           <img
-            src={require(`../../public/ChessPieceIcons/${piece}.png`)} // Update the path based on your asset structure
+            src={require(`/public/ChessPieceIcons/${piece}.png`)} // Update the path based on your asset structure
             alt={piece}
             style={{ width: `${squareSize}px`, height: `${squareSize}px` }}
           />
@@ -172,7 +174,7 @@ const Chessboard = () => {
         <ul>
           {pieces.map((piece) => (
               <img
-                src={require(`../../public/ChessPieceIcons/${piece}.png`)} // Update the path based on your asset structure
+                src={require(`/public/ChessPieceIcons/${piece}.png`)} // Update the path based on your asset structure
                 alt={piece}
                 style={{ width: `${squareSize/2}px`, height: `${squareSize/2}px` }}
               />
