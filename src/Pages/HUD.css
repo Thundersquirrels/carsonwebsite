@@ -1,38 +1,96 @@
-#TopBar {
-    background-color: #4840d8;
+#HUD {
+    background-color: #1a1a1a;
     text-align: center;
-    padding: 14px;
+    color: white;
+    font-size: 20px;
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    min-height: 100vh;
+    z-index: 1;
+}
+
+#TopBar {
+    background-color: #222222;
+    text-align: center;
+    color: white;
+    height: 25vh;
+    padding: 10px;
+    margin: 0px;
     font-size: 20px;
     display: flex;
     justify-content: center;
-    width: 100vw;
-    top: 0;
-    z-index: 1;
+    align-items: center;
+    z-index: 2;
 }
 
 #NameLogo {
-    font-size: 40px;
-    color: white;
-    text-align: center;
-    padding: 14px;
-    display: flex;
-    justify-content: center;
-    width: 50vw;
-    top: 0;
-    z-index: 1;
+    width: 20vw;
+    margin: 5px 20px;
+    z-index: 3;
 }
 
 .subpagebutton {
-    background-color: #4CAF50;
-    border: none;
+    background-color: #2e49e3;
     color: white;
     padding: 15px 32px;
     text-align: center;
-    text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin: 10px 40px;
     cursor: pointer;
-    border-radius: 20%;
+    border-radius: 30px;
     border: 5px solid #333;
+    width: 10vw;
+    z-index: 4;
+}
+
+.subpagebutton:hover {
+    background-color: #1e2eba;
+}
+
+#Main {
+    background-color: #1a1a1a;
+    width: 100vw;
+    min-height: 100vh;
+    color: white;
+    padding: 0px;
+    margin: 0px;
+    font-size: 20px;
+    z-index: 1;
+}
+
+#HUDContent {
+    position: absolute;
+    width: 60vw;
+    left: 20vw;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+}
+
+.SideBar {
+    background-color: #1f1f1f;
+    position: absolute;
+    top: 25vh;
+    width: 20vw;
+    height: 100%;
+    color: white;
+    padding: 10px;
+    margin: 0px;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+}
+
+#LeftSideBar {
+    left: 0px;
+}
+
+#RightSideBar {
+    right: 0px;
 }

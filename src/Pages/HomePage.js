@@ -3,8 +3,7 @@ import HUD from './HUD';
 
 const content = (
   <div>
-    <h1>Home Page</h1>
-    <p>Welcome to my website!</p>
+    <img src="/dying_emoji.gif" alt="Dying Emoji" style={{width: "50vw"}}></img>
   </div>
 );
 

@@ -151,6 +151,7 @@ const Chessboard = () => {
       >
         {piece && (
           <img
+            key={`${piece}-${row}-${col}`}
             src={require(`/public/ChessPieceIcons/${piece}.png`)} // Update the path based on your asset structure
             alt={piece}
             style={{ width: `${squareSize}px`, height: `${squareSize}px` }}
@@ -174,6 +175,7 @@ const Chessboard = () => {
         <ul>
           {pieces.map((piece) => (
               <img
+                key={piece}
                 src={require(`/public/ChessPieceIcons/${piece}.png`)} // Update the path based on your asset structure
                 alt={piece}
                 style={{ width: `${squareSize/2}px`, height: `${squareSize/2}px` }}
