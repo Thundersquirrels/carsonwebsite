@@ -80,11 +80,13 @@ export const validateMove = (gameState, startRow, startCol, endRow, endCol) => {
             (endRow === 0 && endCol === 5 && !board[0][4] && !board[0][5] && !board[0][6] && gameState.specialRequirements.whiteLongCastle)))) {
           move.valid = true;
           move.castle = true;
-          move.specialRequirements.whiteShortCastle = false;
-          move.specialRequirements.whiteLongCastle = false;
         } else {
           // regular white king movement
           move.valid = xa <= 1 && ya <= 1;
+        }
+        if (move.valid) {
+          move.specialRequirements.whiteShortCastle = false;
+          move.specialRequirements.whiteLongCastle = false;
         }
         break;
   
@@ -96,11 +98,13 @@ export const validateMove = (gameState, startRow, startCol, endRow, endCol) => {
             (endRow === 0 && endCol === 6 && !board[0][5] && !board[0][6] && gameState.specialRequirements.blackShortCastle)))) {
           move.valid = true;
           move.castle = true;
-          move.specialRequirements.blackShortCastle = false;
-          move.specialRequirements.blackLongCastle = false;
         } else {
           // regular black king movement
           move.valid = xa <= 1 && ya <= 1;
+        }
+        if (move.valid) {
+          move.specialRequirements.blackShortCastle = false;
+          move.specialRequirements.blackLongCastle = false;
         }
         break;
   
@@ -262,32 +266,5 @@ export const validateMove = (gameState, startRow, startCol, endRow, endCol) => {
         move.valid = false
     }
   
-    if (move.valid) {
-      if ((startRow === 0 && startCol === 0) || (endRow === 0 && endCol === 0)) {
-        if (gameState.whiteOnBottom) {
-          move.specialRequirements.blackLongCastle = false;
-        } else {
-          move.specialRequirements.whiteShortCastle = false;
-        }
-      } else if ((startRow === 0 && startCol === 7) || (endRow === 0 && endCol === 7)) {
-        if (gameState.whiteOnBottom) {
-          move.specialRequirements.blackShortCastle = false;
-        } else {
-          move.specialRequirements.whiteLongCastle = false;
-        }
-      } else if ((startRow === 7 && startCol === 0) || (endRow === 7 && endCol === 0)) {
-        if (gameState.whiteOnBottom) {
-          move.specialRequirements.whiteLongCastle = false;
-        } else {
-          move.specialRequirements.blackShortCastle = false;
-        }
-      } else if ((startRow === 7 && startCol === 7) || (endRow === 7 && endCol === 7)) {
-        if (gameState.whiteOnBottom) {
-          move.specialRequirements.whiteShortCastle = false;
-        } else {
-          move.specialRequirements.blackLongCastle = false;
-        }
-      }
-    }
     return move;
   };

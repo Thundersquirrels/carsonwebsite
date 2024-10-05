@@ -1,7 +1,7 @@
 import React from 'react';
 import HUD from './HUD';
 
-const content = (
+const Content = () => (
   <div>
     <h1>Projects</h1>
     <p>Here are some projects I've worked on:</p>
@@ -10,7 +10,9 @@ const content = (
 
 function ProjectsPage() {
   return (
-    HUD({ content })
+    <HUD>
+      <Content />
+    </HUD>
   )
 };
 

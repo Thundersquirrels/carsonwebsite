@@ -1,7 +1,7 @@
 import React from 'react';
 import HUD from './HUD';
 
-const content = (
+const Content = () => (
   <div>
     <img src="/dying_emoji.gif" alt="Dying Emoji" style={{width: "50vw"}}></img>
   </div>
@@ -9,7 +9,9 @@ const content = (
 
 function HomePage() {
   return (
-    HUD({ content })
+    <HUD>
+      <Content />
+    </HUD>
   )
 };
 

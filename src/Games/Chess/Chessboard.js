@@ -16,7 +16,7 @@ import Modal from 'react-modal'; // Import Modal component for displaying modals
  * @function Chessboard
  * @returns {JSX.Element} Rendered component.
  */
-const Chessboard = () => {
+const Chessboard = (props) => {
   /**
    * Use the useChessGameState hook to get the game state and related functions.
    * @type {Object}
@@ -39,7 +39,7 @@ const Chessboard = () => {
    * Constant for the size of each square.
    * @type {number}
    */
-  const squareSize = 80;
+  const squareSize = props.squareSize || 80;
 
   /**
    * Handle when a square is clicked.
@@ -170,7 +170,7 @@ const Chessboard = () => {
    */
   const CapturedPieces = ({ player, pieces }) => {
     return (
-      <div style={{ backgroundColor: '#eeeeee', padding: '0px 10px 0px 10px', border: '2px solid black' }}>
+      <div style={{ backgroundColor: '#eeeeee', color: 'black', padding: '0 1em', border: '0.4em solid black', borderRadius: '1em' }}>
         <h2>{player}'s Captured Pieces:</h2>
         <ul>
           {pieces.map((piece) => (
@@ -198,7 +198,7 @@ const Chessboard = () => {
     const blackSeconds = (timeLimit - seconds.black) % 60;
     const blackTime = timeLimit ? `${Math.floor((timeLimit - seconds.black) / 60)}:${blackSeconds < 10 ? '0' + blackSeconds : blackSeconds}` : 'N/A';
     return (
-      <div style={{ backgroundColor: '#eeeeee', padding: '0px 10px 0px 10px', border: '2px solid black' }}>
+      <div style={{ backgroundColor: '#eeeeee', color: 'black', padding: '0 1em', border: '0.4em solid black', borderRadius: '1em' }}>
         <h2>{player}'s Time Remaining:</h2>
         <h2>{player === 'White' ? whiteTime : blackTime}</h2>
       </div>
@@ -255,7 +255,7 @@ const Chessboard = () => {
    * @returns {JSX.Element} The rendered chessboard.
    */
   return (   
-  <div style={{ backgroundColor: '#6495ED', height: '100vh' }}>
+  <div style={{ backgroundColor: '#6495ED', fontSize: '0.6em', width: '90%' }}>
     <Modal isOpen={modalIsOpen}>
       <h2 style={{ fontSize: '2em', textAlign: 'center' }}>Chess Game Selection:</h2>
       <form onSubmit={handleGameTypeSelect} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -286,14 +286,14 @@ const Chessboard = () => {
         <button type="submit" style={{ fontSize: '2.5em' }}>Start Game</button>
       </form>
     </Modal>
-    <h1 style={{ marginTop: '0px', paddingTop: '40px', font: 'bold 50px Arial', textAlign: 'center', color: '#eeeeee' }}>Chess</h1>
-    <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', margin: '20px' }}>
-      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: `${squareSize*2}px` }}>
+    <h1 style={{ paddingTop: '0.5em', font: 'bold 4em Arial', textAlign: 'center', color: '#eeeeee' }}>Chess</h1>
+    <div style={{ display: 'flex', justifyContent: 'space-evenly', gap: '0.5em', margin: '1em' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}}>
         <CapturedPieces player={!gameState.whiteOnBottom ? 'White' : 'Black'} pieces={!gameState.whiteOnBottom ? gameState.whiteCapturedPieces : gameState.blackCapturedPieces} />
-        <h1 style={{ font: 'bold 25px Arial', textAlign: 'center', color: '#eeeeee' }}>{message}</h1>
+        <h1 style={{ textAlign: 'center', color: '#eeeeee' }}>{message}</h1>
         <CapturedPieces player={gameState.whiteOnBottom ? 'White' : 'Black'} pieces={gameState.whiteOnBottom ? gameState.whiteCapturedPieces : gameState.blackCapturedPieces} />
       </div>
-      <div className="chessboard-container" style={{ border: '10px solid black', margin: '20px' }}>
+      <div className="chessboard-container" style={{ border: '0.5em solid black', margin: '2em', height: 'min-content' }}>
         {/* Render each row */}
         {gameState.board.map((row, rowIndex) => (
           <div key={rowIndex} style={{ display: 'flex' }}>
@@ -302,15 +302,15 @@ const Chessboard = () => {
           </div>
         ))}
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: `${squareSize*5}px` }}>
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', gap: `${squareSize}px` }}>
         <Timer player={!gameState.whiteOnBottom ? 'White' : 'Black'} />
         <Timer player={gameState.whiteOnBottom ? 'White' : 'Black'} />
       </div>
     </div>
-    <div style={{ display: 'flex', justifyContent: 'center', gap: '50px', margin: '20px' }}>
-      <button style={{ border: '1px solid black', height: '50px', font: 'bold 30px Arial' }} 
+    <div style={{ display: 'flex', justifyContent: 'center', gap: '1em', margin: '2em' }}>
+      <button style={{ border: '0.2em solid black', borderRadius: '0.5em', height: '2em', font: 'bold 2em Arial' }} 
               onClick={handleNewGameClick}>New Game</button>
-      <button style={{ border: '1px solid black', height: '50px', font: 'bold 30px Arial' }}>
+      <button style={{ border: '0.2em solid black', borderRadius: '0.5em',  height: '2em', font: 'bold 2em Arial' }}>
         <a href="/" style={{ textDecoration: 'none', color: 'black' }}>Back to Home</a>
       </button>
     </div>

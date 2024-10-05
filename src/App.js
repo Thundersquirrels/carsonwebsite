@@ -4,7 +4,7 @@ import HomePage from './Pages/HomePage';
 import AboutPage from './Pages/AboutPage';
 import GamesPage from './Pages/GamesPage';
 import ProjectsPage from './Pages/ProjectsPage';
-import MiscPage from './Pages/MiscPage';
+import OtherPage from './Pages/OtherPage';
 
 function App() {
     return (
@@ -13,7 +13,7 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/games" element={<GamesPage />} />
             <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/misc" element={<MiscPage />} />
+            <Route path="/other" element={<OtherPage />} />
         </Routes>
     );
 }

@@ -2,18 +2,20 @@ import React from 'react';
 import HUD from './HUD';
 import BlockScreen from '../Misc/BouncingBlockScreen/BlockScreen';
 
-const content = (
+const Content = () => (
   <div>
-    <h1>Misc</h1>
+    <h1>Other</h1>
     <p>Here are some miscellaneous things I've made:</p>
     <BlockScreen />
   </div>
 );
 
-function MiscPage() {
+function OtherPage() {
   return (
-    HUD({ content })
+    <HUD>
+      <Content />
+    </HUD>
   )
 };
 
-export default MiscPage;
+export default OtherPage;
