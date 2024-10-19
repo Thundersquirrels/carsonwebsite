@@ -1,83 +1,67 @@
 import React, { useState, useEffect, useRef } from 'react';
-import debounce from 'lodash/debounce';
 
-const BouncingBlock = ({ parent }) => {
-    const [position, setPosition] = useState({ x: 20, y: 20 });
+const BouncingBlock = ({ parent, mousePosition }) => {
+    const [position, setPosition] = useState({ x: 100, y: 100 });
+    const [colorHue, setColorHue] = useState(0);
+    const [direction, setDirection] = useState({ x: 1, y: 1 });
+    const [maxDistance, setMaxDistance] = useState(1);
+    const [parentRect, setParentRect] = useState(null);
     const logoRef = useRef(null);
 
+    const updatePosition = () => {setPosition(position => {
+        if (!parentRect) return position;
+        console.log(parentRect);
+        console.log(logoRef.current.getBoundingClientRect())
+        const leftBoundary = 0;
+        const rightBoundary = parentRect.width - logoRef.current.getBoundingClientRect().width;
+        const topBoundary = 0;
+        const bottomBoundary = parentRect.height - logoRef.current.getBoundingClientRect().height;
+        let newX = position.x + direction.x;
+        let newY = position.y + direction.y;
+
+        if (newX > rightBoundary) {
+            newX = rightBoundary;
+            setDirection({ ...direction, x: -1 });
+            setColorHue(Math.random() * 360);
+        }
+        if (newX < leftBoundary) {
+            newX = leftBoundary;
+            setDirection({ ...direction, x: 1 });
+            setColorHue(Math.random() * 360);
+        }
+        if (newY > bottomBoundary) {
+            newY = bottomBoundary;
+            setDirection({ ...direction, y: -1 });
+            setColorHue(Math.random() * 360);
+        }
+        if (newY < topBoundary) {
+            newY = topBoundary;
+            setDirection({ ...direction, y: 1 });
+            setColorHue(Math.random() * 360);
+        }
+        console.log({ x: newX, y: newY });
+        return { x: newX, y: newY };
+    })};
+
     useEffect(() => {
-        let colorHue = 0;
-        let direction = { x: 1, y: 1 };
-        let mousePosition = { x: 0, y: 0 };
-
-        const updatePosition = () => {
-            setPosition((prevPosition) => {
-                let newX = prevPosition.x + direction.x;
-                let newY = prevPosition.y + direction.y;
-
-                if (parent.current) {
-                    const leftBoundary = 20;
-                    const topBoundary = 20;
-                    const rightBoundary = parent.current.offsetWidth - 72;
-                    const bottomBoundary = parent.current.offsetHeight - 74;
-
-                    if (newX >= rightBoundary) {
-                        newX = rightBoundary;
-                        direction = { ...direction, x: -1 };
-                        colorHue = Math.random() * 360;
-                    }
-                    if (newX <= leftBoundary) {
-                        newX = leftBoundary;
-                        direction = { ...direction, x: 1 };
-                        colorHue = Math.random() * 360;
-                    }
-                    if (newY >= bottomBoundary) {
-                        newY = bottomBoundary;
-                        direction = { ...direction, y: -1 };
-                        colorHue = Math.random() * 360;
-                    }
-                    if (newY <= topBoundary) {
-                        newY = topBoundary;
-                        direction = { ...direction, y: 1 };
-                        colorHue = Math.random() * 360;
-                    }
-                
-                    const maxDistance = Math.sqrt(window.innerWidth ** 2 + window.innerHeight ** 2);
-                    const distance = Math.sqrt((newX + 50 - mousePosition.x) ** 2 + (newY + 50 - mousePosition.y) ** 2);
-                    const colorMult = 1 - (distance / maxDistance) ** 0.7;
-                    logoRef.current.style.backgroundColor = `hsl(${colorHue}, 50%, ${colorMult * 100}%)`;
-                }
-
-                return { x: newX, y: newY };
-            });
-        };
-
+        setParentRect(parent.current.getBoundingClientRect());
+        setMaxDistance(Math.sqrt(parent.current.getBoundingClientRect().width ** 2 + parent.current.getBoundingClientRect().height ** 2));
         const intervalId = setInterval(updatePosition, 10);
-
-        const handleMouseMove = debounce((event) => {
-            const { clientX, clientY } = event;
-            mousePosition = { x: clientX, y: clientY };
-        }, 1); // Adjust this value as needed
-    
-        window.addEventListener('mousemove', handleMouseMove);
-    
         return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            handleMouseMove.cancel(); // Cancel any pending executions
             clearInterval(intervalId);
         };
-    }, [parent]);
+    }, []);
 
     return (
         <div ref={logoRef}
             style={{
-                width: '100px',
-                height: '100px',
+                width: '1em',
+                height: '1em',
                 borderRadius: '5%',
                 position: 'absolute',
-                top: position.y + 'px',
-                left: position.x + 'px',
-                backgroundColor: 'hsl(0, 50%, 50%)',
+                left: position.x,
+                top: position.y,
+                backgroundColor: `hsl(${colorHue}, 50%, ${(1 - (Math.sqrt((position.x - mousePosition.x) ** 2 + (position.y - mousePosition.y) ** 2) / maxDistance) ** 0.7) * 100}%)`,
             }}
         >
         </div>

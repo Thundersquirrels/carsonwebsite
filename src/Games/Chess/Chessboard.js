@@ -173,9 +173,9 @@ const Chessboard = (props) => {
       <div style={{ backgroundColor: '#eeeeee', color: 'black', padding: '0 1em', border: '0.4em solid black', borderRadius: '1em' }}>
         <h2>{player}'s Captured Pieces:</h2>
         <ul>
-          {pieces.map((piece) => (
+          {pieces.map((piece, index) => (
               <img
-                key={piece}
+                key={index}
                 src={require(`/public/ChessPieceIcons/${piece}.png`)} // Update the path based on your asset structure
                 alt={piece}
                 style={{ width: `${squareSize/2}px`, height: `${squareSize/2}px` }}

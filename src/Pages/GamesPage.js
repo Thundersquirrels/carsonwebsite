@@ -9,7 +9,7 @@ const Content = () => {
 
   useEffect(() => {
     if (parent.current) {
-      setSquareSize(parent.current.offsetWidth / 40);
+      setSquareSize(parent.current.offsetWidth / 20);
     }
   }, []);
 

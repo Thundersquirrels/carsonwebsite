@@ -2,11 +2,12 @@
     background-color: #1a1a1a;
     display: flex;
     flex-direction: column;
-    font-size: 1.5vmin;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2vw;
 }
 
 #TopBar {
-    background-color: #222222;
+    background-color: #0f0f0f;
     padding: 1em 0;
     display: flex;
     justify-content: space-evenly;
@@ -40,19 +41,20 @@
 #Main {
     background-color: #1a1a1a;
     display: flex;
-    justify-content: space-between;
     width: 100%;
 }
 
-#HUDContent {
-    width: 100%;
+#Content {
+    flex-grow: 1;
+    font-size: 1em;
 }
 
-.SideBar {
+#SideBar {
     background-color: #222222;
     color: white;
     padding: 0 1em;
     font-size: 1em;
+    width: 20%;
 }
 
 #BottomBar {

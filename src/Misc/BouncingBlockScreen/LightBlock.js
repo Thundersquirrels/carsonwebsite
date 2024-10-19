@@ -1,49 +1,32 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import debounce from 'lodash/debounce';
 
-function LightBlock({ color }) {
-    const [colorMult, setColorMult] = useState(1);
-    const testRef = useRef(null);
+function LightBlock({ color, mousePosition }) {
+  const testRef = useRef(null);
 
-    const [rect, setRect] = useState(null);
+  const [rect, setRect] = useState(null);
+  const [parentRect, setParentRect] = useState(null);
 
-    useEffect(() => {
-      if (testRef.current) {
-        setRect(testRef.current.getBoundingClientRect());
-      }
-    }, []);
-  
-    const { maxDistance, x, y, randomColor } = useMemo(() => {
-      if (!rect) return {};
-  
-      const maxDistance = Math.sqrt(window.innerWidth ** 2 + window.innerHeight ** 2);
-      const x = rect.left + rect.width / 2;
-      const y = rect.top + rect.height / 2;
-      const randomColor = Math.random() * 4;
-      return { maxDistance, x, y, randomColor };
-    }, [rect]); // Add dependencies here if any
+  useEffect(() => {
+    if (testRef.current) {
+      setRect(testRef.current.getBoundingClientRect());
+      setParentRect(testRef.current.parentNode.getBoundingClientRect());
+    }
+  }, []);
 
-    useEffect(() => {
-        const handleMouseMove = debounce((event) => {
-            const { clientX, clientY } = event;
-            const distance = Math.sqrt((clientX - x) ** 2 + (clientY - y) ** 2);
-            setColorMult(1 - Math.sqrt(distance / maxDistance));
-        }, 0.1); // Adjust this value as needed
-    
-        window.addEventListener('mousemove', handleMouseMove);
-    
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            handleMouseMove.cancel(); // Cancel any pending executions
-        };
-      }, [maxDistance, x, y]);
+  const { maxDistance, x, y, randomColor } = useMemo(() => {
+    if (!rect || !parentRect) return {};
 
-    const backgroundColor = `hsl(${color}, 50%, ${colorMult * 90 + randomColor}%)`;
+    const maxDistance = Math.sqrt(parentRect.width ** 2 + parentRect.height ** 2);
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    const randomColor = Math.random() * 4;
+    return { maxDistance, x, y, randomColor };
+  }, [rect, parentRect]);
 
-    return (
-        <div className={"test"} ref={testRef} style={{ backgroundColor: backgroundColor }}>
-        </div>
-    );
+  return (
+    <div className={"lightBlock"} ref={testRef} style={{ backgroundColor: `hsl(${color}, 50%, ${(1 - Math.sqrt(Math.sqrt((mousePosition.x - x) ** 2 + (mousePosition.y - y) ** 2) / maxDistance)) * 90 + randomColor}%)` }}>
+    </div>
+  );
 }
 
 export default LightBlock;
