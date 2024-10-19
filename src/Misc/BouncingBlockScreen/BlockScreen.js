@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import debounce from 'lodash/debounce';
 import './BlockScreen.css';
 import LightBlock from './LightBlock.js';
-import BouncingBlock from './BouncingBlock.js';
+// import BouncingBlock from './BouncingBlock.js';
 
 const BlockScreen = () => {
   const tests = Array.from({ length: 144 }, (_, i) => i + 1);
@@ -38,7 +38,7 @@ const BlockScreen = () => {
           {tests.map((num) => (
             <LightBlock key={num} color={color} mousePosition={mousePosition}/>
           ))}
-          <BouncingBlock parent={testScreenRef} mousePosition={mousePosition}/>
+          {/* <BouncingBlock parent={testScreenRef} mousePosition={mousePosition}/> */}
         </div>
         {/* <div style={{
           width: '1em',
