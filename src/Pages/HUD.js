@@ -27,7 +27,6 @@ const TopBar = () => (
 const SideBar = () => (
   <div id="SideBar">
     <h1>Contact Info</h1>
-    <p>Los Angeles, CA</p>
     <h2>Email</h2>
     <p>carson@reality.net</p>
     <h2>GitHub</h2>
