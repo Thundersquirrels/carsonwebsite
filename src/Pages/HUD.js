@@ -27,12 +27,13 @@ const TopBar = () => (
 const SideBar = () => (
   <div id="SideBar">
     <h1>Contact Info</h1>
+    <p>Los Angeles, CA</p>
     <h2>Email</h2>
-    <h3>carson@reality.net</h3>
+    <p>carson@reality.net</p>
     <h2>GitHub</h2>
-    <h3>github.com/Thundersquirrels</h3>
+    <a href="https://github.com/Thundersquirrels">github.com/Thundersquirrels</a>
     <h2>LinkedIn</h2>
-    <h3>linkedin.com/in/carson-s-cox</h3>
+    <a href="https://www.linkedin.com/in/carson-s-cox/">linkedin.com/in/carson-s-cox/</a>
 </div>
 );
 

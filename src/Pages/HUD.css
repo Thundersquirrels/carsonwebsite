@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     font-family: 'Poppins', sans-serif;
-    font-size: 1.2vw;
+    font-size: 1vw;
 }
 
 #TopBar {
@@ -13,10 +13,12 @@
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
+    font-size: 0.8em;
+    text-decoration: none;
 }
 
 #NameLogoLink {
-    width: 20%;
+    width: 10%;
 }
 
 #NameLogo {
@@ -41,7 +43,7 @@
 #Main {
     background-color: #1a1a1a;
     display: flex;
-    width: 100%;
+    min-height: 100vh;
 }
 
 #Content {
@@ -55,6 +57,11 @@
     padding: 0 1em;
     font-size: 1em;
     width: 20%;
+}
+
+#SideBar > a, p {
+    color: white;
+    font-size: 1.2em;
 }
 
 #BottomBar {
